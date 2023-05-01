@@ -21,7 +21,7 @@ jobs:
           username: ${{github.actor}}
           password: ${{secrets.GITHUB_TOKEN}}
 
-      - name: Push container
+      - name: Build/Push container
         run: |
           export VERSION=$(grep 'version = "' math_api/pyproject.toml | head -1 | awk -F'"' '{print $2}')
           export CONTAINER_NAME=ghcr.io/datarootsio/cm-training:$VERSION
