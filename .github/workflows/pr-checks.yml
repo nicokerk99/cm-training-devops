@@ -15,10 +15,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install poetry==1.1.13
           pip install pre-commit==2.13.0
-          poetry config virtualenvs.create false
-          poetry install --no-interaction --no-ansi
+          pre-commit install
 
       - name: Run pre-commit on all files
         run: |
