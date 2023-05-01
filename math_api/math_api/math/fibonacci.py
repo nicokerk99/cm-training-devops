@@ -8,8 +8,8 @@ def fibonacci(n: int) -> int:
     Parameters
     ----------
     n: int
-        Index for the number in the Fibonacci sequence, such that fibonacci(n) returns
-        the nth number in the series.
+        Index for the number in the Fibonacci sequence, such that fibonacci(n)
+        returns the nth number in the series.
 
     Returns
     ----------
@@ -30,15 +30,15 @@ def fibonacci(n: int) -> int:
 
 @cache
 def fibonacci_cached(n: int) -> int:
-    """Cached version of the very naive implementation of the Fibonacci sequence where
-    fibonacci(n) = fibonacci(n-1) + fibonacci(n-2) for n > 1. The caching causes a
-    significant performance boost.
+    """Cached version of the very naive implementation of the Fibonacci
+    sequence where fibonacci(n) = fibonacci(n-1) + fibonacci(n-2) for n > 1.
+    The caching causes a significant performance boost.
 
     Parameters
     ----------
     n: int
-        Index for the number in the Fibonacci sequence, such that fibonacci(n) returns
-        the nth number in the series.
+        Index for the number in the Fibonacci sequence, such that fibonacci(n)
+        returns the nth number in the series.
 
     Returns
     ----------
