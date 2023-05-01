@@ -1,0 +1,28 @@
+name: "release-dev"
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-push-container:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build container
+        run: |
+          export VERSION=$(grep 'version = "' math_api/pyproject.toml | head -1 | awk -F'"' '{print $2}')
+          export IMAGE_REF=$ECR_REGISTRY/$ECR_REPOSITORY:dev-$VERSION
+          docker build -t $IMAGE_REF .
+
+      - name: Push container
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: rootsacademy/cicd-exercise-nico
+        run: |
+          export VERSION=$(grep 'version = "' math_api/pyproject.toml | head -1 | awk -F'"' '{print $2}')
+          export IMAGE_REF=$ECR_REGISTRY/$ECR_REPOSITORY:dev-$VERSION
+          docker push $IMAGE_REF
