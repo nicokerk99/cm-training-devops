@@ -23,7 +23,7 @@ def sub(t1: int, t2: int) -> int:
 
 
 @router.get("/div")
-def div(t1: int, t2: int) -> int:
+def div(t1: int, t2: int) -> float:
     """For two integers t1 and t2, returns t1/t2."""
     return operations.div(t1, t2)
 
