@@ -1,41 +1,107 @@
-# Python 301
+# DevOps
 
-In this exercise, you will implement a calculator API that serves endpoints for mathematical functions using [FastAPI](https://fastapi.tiangolo.com/). The goal is to make you familiar with building APIs, [`poetry`](https://python-poetry.org/) for package and dependency management and [`pytest`](https://pytest.org) for testing. You should also make sure that your code is properly formatted using [`black`](https://github.com/psf/black) and [`isort`](https://pycqa.github.io/isort/).
+## Docker Exercise
 
+Goal: build a container and run it locally
 
-## Getting started
+Requirements:
+ - Add a “Dockerfile” to your repo
+ - Make it so “docker build .” will build your container, including your application
+ - To test if it works => “docker run your-container” and check your browser
 
-1. Verify if poetry is installed on your machine using `poetry --version`.
-2. Clone this repository
-3. In a terminal, navigate to the project's root folder
-4. Use poetry to generate a new package called `math_api`. Refer to the documentation of the `poetry new` command to find out how to do that. This will generate the following project structure:
-    ```
-    .
-    ├── math_api
-    │   ├── README.md
-    │   ├── math_api
-    │   │   └── __init__.py
-    │   ├── pyproject.toml
-    │   └── tests
-    │       └── __init__.py
-    ```
+Tips:
+- https://docs.docker.com/get-started/02_our_app/#build-the-apps-container-image
+- For your web server to be accessible, don’t forget to expose the port!
 
-## Exercise
+## CICD Exercises
 
-1. Create a FastAPI app in `math_api/app.py` (so on the level of `pyproject.toml`) that serves your FastAPI API. The logic of your app should exist in `math_api/math_api/`. See FastAPI's ['first steps' documentation](https://fastapi.tiangolo.com/tutorial/first-steps/) to help you to get started. Manage your dependencies with poetry so that teammates could easily set up their own environments. Also try to make a distinction between dependencies for development and dependencies for code that runs in production.
-2. Implement the following endpoints:
-   - `/add` which accepts two parameters `a` and `b` and returns the result of `a+b`
-   - `/sub` which accepts two parameters `a` and `b` and returns the result of `a-b`
-   - `/mul` which accepts two parameters `a` and `b` and returns the result of `a*b`
-   - `/div` which accepts two parameters `a` and `b` and returns the result of `a/b`
-   - `/fib` which accepts a parameter `n` and returns [Fibonacci number](https://en.wikipedia.org/wiki/Fibonacci_sequence) $F_n$
-3. During development, pay attention to your [project structure](https://fastapi.tiangolo.com/tutorial/bigger-applications/) and add type hints for your methods and parameters.
-5. Document your code with docstrings.
-6. Write tests for each method with [`pytest`](https://pytest.org)
-7. Format your code with black, isort and flake8.
+Create CICD pipeline for a python application.
+3 exercises:
+1. Exercise 1: Simple github actions pipeline
+2. Exercise 2: Continuous Integration
+3. Exercise 3: Continuous Delivery
 
+Starting point from SWE exercise
 
-**Extra:**
-1. Install pre-commit and configure it so it runs black, flake8, isort and pytest.
-2. Write a shell script that runs your tests and formatting checks, collects the return codes and writes a report to a file.
-3. Package your app with poetry.
+### Exercise 1: Simple github actions pipeline
+
+Goal: play around with a github actions pipeline
+
+Requirements:
+- Create a github pipeline
+- Print “hello world” in your pipeline
+
+Tip: https://docs.github.com/en/actions/quickstart
+
+### Exercise 2: Continuous Integration
+
+Goal: assert quality of code
+
+Requirements:
+- CI pipeline
+- Pipeline runs on every push to the repo
+- Only add code to main via PR merge (via Branch policies settings)
+- Block PR if CI pipeline fails (via Branch policies settings)
+- Bonus: try to show test coverage in the UI
+
+Tip: https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches#require-status-checks-before-merging
+
+### Exercise 3: Continuous Delivery
+
+Goal: release python package
+
+Requirements:
+- CD pipeline
+  - Container build
+    - Build the container
+    - Tag the image with the datetime
+    - Push it to the github container registry
+- Pipeline only runs when push to main
+- Pull your created container locally and run it
+
+Tip: https://dev.to/willvelida/pushing-container-images-to-github-container-registry-with-github-actions-1m6b
+
+## Use full commands for you exercises
+
+### Docker
+
+Following commands are examples, adjust them to your needs.
+
+```bash
+# Build the container
+docker build -t <image_name> .
+
+# Run the container with port forwarding
+docker run -p 5000:5000 <image_name>
+
+# Push the container to github container registry
+docker tag <image_name> ghcr.io/<github_username>/<image_name>:<tag>
+docker push ghcr.io/<github_username>/<image_name>:<tag>
+
+# Pull the container from github container registry
+docker pull ghcr.io/<github_username>/<image_name>:<tag>
+```
+
+### Pre-commit
+
+```bash
+pre-commit install
+pre-commit run --all-files
+```
+
+### Poetry
+
+```bash
+# Install poetry
+pip install poetry
+
+# Install dependencies
+poetry install
+```
+
+### Pytest
+
+```bash
+# Run tests with coverage
+pytest --cov=./ --cov-report=xml
+```
