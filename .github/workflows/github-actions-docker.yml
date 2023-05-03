@@ -16,7 +16,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build the hello-docker Docker image
         run: |
-          export VERSION=$(grep 'version = "' math_api/pyproject.toml | head -1 | awk -F'"' '{print $2}')
-          export CONTAINER_NAME=ghcr.io/datarootsio/cm-training:$VERSION-dev
+          export VERSION=$(grep 'version = "' pyproject.toml | head -1 | awk -F'"' '{print $2}')
+          export CONTAINER_NAME=ghcr.io/nicokerk99/cm-training:$VERSION-dev
           docker build . --tag $CONTAINER_NAME
           docker push $CONTAINER_NAME
