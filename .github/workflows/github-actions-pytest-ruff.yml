@@ -1,5 +1,6 @@
 name: Python package
 # useless comment
+# 2nd useless comment
 run-name: ${{ github.actor }} is testing out ruff and pytest 🚀
 
 on:
