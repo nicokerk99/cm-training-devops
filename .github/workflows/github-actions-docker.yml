@@ -17,4 +17,4 @@ jobs:
       - name: Build the hello-docker Docker image
         run: |
           docker build ./math_api --tag 'v1'
-          docker push ghcr.io/nicokerk99/cm-training:latest
+          docker push ghcr.io/nicokerk99/cm-training:v1
