@@ -21,10 +21,10 @@ repos:
       - id: mypy
         files: (math_api/math_api/)
   - repo: local
-  hooks:
-    - id: pytest-check
-      name: pytest-check
-      entry: pytest
-      language: system
-      pass_filenames: false
-      always_run: true
+    hooks:
+      - id: pytest-check
+        name: pytest-check
+        entry: pytest
+        language: system
+        pass_filenames: false
+        always_run: true
