@@ -3,6 +3,7 @@ run-name: ${{ github.actor }} is using pre-commit hooks 🚀
 
 on:
   pull_request:
+    branches: [main]
   push:
     branches: [main]
 
