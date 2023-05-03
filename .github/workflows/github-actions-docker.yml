@@ -1,6 +1,8 @@
 name: publish
 run_name: publish Docker image
-on: [push]
+on:
+  push:
+    branches: [main]
 jobs:
   publish-hello-docker-image:
     runs-on: ubuntu-latest
