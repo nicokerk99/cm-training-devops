@@ -3,6 +3,10 @@ run-name: publish Docker image
 on:
   push:
     branches: [main]
+
+permissions:
+  packages: write
+  
 jobs:
   publish-hello-docker-image:
     runs-on: ubuntu-latest
