@@ -1,30 +1,14 @@
 
-FROM python:3.9 as requirements-stage
+FROM python:3.10
 
-
-WORKDIR /tmp
-
-
+RUN mkdir /app
 RUN pip install poetry
 
+COPY . /app
 
-COPY ./pyproject.toml ./poetry.lock* /tmp/
+WORKDIR /app
 
+RUN poetry config virtualenvs.create false
+RUN poetry install
 
-RUN poetry export -f requirements.txt --output requirements.txt --without-hashes
-
-
-FROM python:3.9
-
-
-WORKDIR /code
-
-
-COPY --from=requirements-stage /tmp/requirements.txt /code/requirements.txt
-
-
-RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
-
-COPY ./math_api /code/app
-
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
+ENTRYPOINT ["uvicorn", "math_api.app:app", "--host", "0.0.0.0", "--port", "80"]
