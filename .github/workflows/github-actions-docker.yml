@@ -1,5 +1,5 @@
 name: publish
-run_name: publish Docker image
+run-name: publish Docker image
 on:
   push:
     branches: [main]
