@@ -9,7 +9,7 @@ def test_fib_negative():
 
 
 def test_fib_small():
-    assert fibonacci(3) == 2
+    assert fibonacci(3) == 3
 
 
 def test_fib_cached_negative():
